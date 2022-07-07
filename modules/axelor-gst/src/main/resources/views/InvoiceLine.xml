@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+
+  <form name="invoice-line-form" title="Invoice line"
+    model="com.axelor.apps.account.db.InvoiceLine" extension="true" id="gst-invoice-line-form">
+    <extend target="//field[@name='taxLine']">
+      <insert position="after">
+        <field name="hsbn"/>
+        <field name="gstRate" readonly="true"/>
+        <field name="igst" readonly="true"/>
+        <field name="sgst" readonly="true"/>
+        <field name="cgst" readonly="true"/>
+      </insert>
+    </extend>
+    <extend target="//panel[@name='customerInvoicePanel']/field[@name='product']">
+      <attribute name="onChange" value="action-group-invoice-line-product-onchange"/>
+    </extend>
+    <extend target="//panel[@name='supplierInvoicePanel']/field[@name='product']">
+      <attribute name="onChange" value="action-group-invoice-line-product-onchange"/>
+    </extend>
+    <extend target="//panel[@name='informationsPanel']/field[@name='qty']">
+      <attribute name="onChange" value="action-group-invoice-line-qty-onchange"/>
+    </extend>
+    <extend target="//panel[@name='informationsPanel']/field[@name='taxLine']">
+      <attribute name="onChange" value="action-group-invoice-line-taxline-onchange"/>
+    </extend>
+  </form>
+  <action-group name="action-group-invoice-line-taxline-onchange">
+    <action
+      name="action-invoice-line-method-convert-tax,action-invoice-line-method-compute,action-invoice-line-method-compute-analytic-distribution,action-budget-validate-exceed-line-amount"/>
+    <action name="action-group-account-invoice-line-qty-onchange"/>
+    <action name="action-product-method-calculate-netamount"/>
+  </action-group>
+  <action-group name="action-group-invoice-line-qty-onchange">
+    <action name="action-group-account-invoice-line-qty-onchange"/>
+    <action name="action-product-method-calculate-netamount"/>
+  </action-group>
+  <action-group name="action-group-invoice-line-product-onchange">
+    <action name="action-group-account-invoice-line-product-onchange"/>
+    <action name="action-product-record-product-name-onchange"/>
+    <action name="action-product-method-calculate-netamount"/>
+  </action-group>
+  <action-record name="action-product-record-product-name-onchange"
+    model="com.axelor.apps.account.db.InvoiceLine">
+    <field name="gstRate" expr="eval: product.gstRate"/>
+    <field name="hsbn" expr="eval: product.hsbn"/>
+  </action-record>
+
+  <action-method name="action-product-method-calculate-netamount">
+    <call class="com.axelor.apps.gst.web.InvoiceLineController" method="calculateGst"/>
+  </action-method>
+
+</object-views>

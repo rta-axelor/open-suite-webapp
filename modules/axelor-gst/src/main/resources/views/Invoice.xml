@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+  <form model="com.axelor.apps.account.db.Invoice" title="Invoice" name="invoice-form"
+    extension="true " id="gst-invoice-form">
+
+    <extend target="//panel-related[@name='invoiceLineTaxListPanel']">
+      <insert position="before">
+        <field name="netIgst"/>
+        <field name="netCgst"/>
+        <field name="netSgst"/>
+      </insert>
+    </extend>
+    <extend target="//panel-related[@name='invoiceLineListPanel']">
+      <attribute name="onChange" value="action-group-invoice-line-list-onchange"/>
+    </extend>
+  </form>
+  <action-group name="action-group-invoice-line-list-onchange">
+    <action name="action-invoice-group-invoice-line-list-on-change"/>
+    <action name="action-gst-invoice-line-onchange"/>
+  </action-group>
+  <action-method name="action-gst-invoice-line-onchange">
+    <call class="com.axelor.apps.gst.web.InvoiceController" method="calculateNetGst"/>
+  </action-method>
+
+</object-views>

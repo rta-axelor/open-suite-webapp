@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+
+  <menuitem title="GST" name="gst-root" icon="fa-percent" icon-background="green"/>
+
+  <menuitem title="Company" name="gst-root-company" parent="gst-root"
+    action="gst-root-company"/>
+  <action-view name="gst-root-company" title="Company"
+    model="com.axelor.apps.base.db.Company">
+    <view type="grid" name="company-grid"/>
+    <view type="form" name="company-form"/>
+  </action-view>
+
+  <menuitem title="Partner" name="gst-root-partner" parent="gst-root"
+    action="gst-root-partner"/>
+  <action-view name="gst-root-partner" title="Partner"
+    model="com.axelor.apps.base.db.Partner">
+    <view type="grid" name="partner-grid"/>
+    <view type="form" name="partner-form"/>
+  </action-view>
+
+  <menuitem title="Address" name="gst-root-address" parent="gst-root"
+    action="gst-root-address"/>
+  <action-view name="gst-root-address" title="Address"
+    model="com.axelor.apps.base.db.Address">
+    <view type="grid" name="address-grid"/>
+    <view type="form" name="address-form"/>
+  </action-view>
+  <menuitem title="State" name="gst-root-state" parent="gst-root" action="gst-root-state"/>
+  <action-view name="gst-root-state" title="State" model="com.axelor.apps.gst.db.State">
+    <view type="grid" name="state-grid"/>
+    <view type="form" name="state-form"/>
+  </action-view>
+
+  <menuitem title="Bank" name="gst-root-bank" parent="gst-root" action="gst-root-bank"/>
+  <action-view name="gst-root-bank" title="Bank" model="com.axelor.apps.base.db.Bank">
+    <view type="grid" name="bank-grid"/>
+    <view type="form" name="bank-form"/>
+  </action-view>
+
+  <menuitem title="Product" name="gst-root-product" parent="gst-root"
+    action="gst-root-product"/>
+  <action-view name="gst-root-product" title="Product"
+    model="com.axelor.apps.base.db.Product">
+    <view type="grid" name="product-grid"/>
+    <view type="form" name="product-form"/>
+  </action-view>
+
+  <menuitem title="Product Category" name="gst-root-product-category" parent="gst-root"
+    action="gst-root-product-category"/>
+  <action-view name="gst-root-product-category" title="Product Category"
+    model="com.axelor.apps.base.db.ProductCategory">
+    <view type="grid" name="product-category-grid"/>
+    <view type="form" name="product-category-form"/>
+  </action-view>
+  <menuitem title="Invoice" name="gst-root-invoice" parent="gst-root"
+    action="gst-root-invoice"/>
+  <action-view name="gst-root-invoice" title="Invoice"
+    model="com.axelor.apps.account.db.Invoice">
+    <view type="grid" name="invoice-grid"/>
+    <view type="form" name="invoice-form"/>
+  </action-view>
+</object-views>
